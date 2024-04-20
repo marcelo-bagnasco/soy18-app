@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Services\FizzBuzz;
+use Illuminate\Console\Command;
 
 class FizzBuzzCommand extends Command
 {

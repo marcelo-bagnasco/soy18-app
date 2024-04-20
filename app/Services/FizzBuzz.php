@@ -20,22 +20,22 @@ class FizzBuzz
 
     public function process(): array
     {
-        for( $i=1; $i <= $this->length; $i++) {
-            $this->resultArray[ $i ] = $this->getResultNumber($i);
+        for ($i = 1; $i <= $this->length; $i++) {
+            $this->resultArray[$i] = $this->getResultNumber($i);
         }
         return $this->resultArray;
     }
 
-    private function getResultNumber( int $i ): int|string
+    private function getResultNumber(int $i): int|string
     {
         $ret = '';
-        if( $i % 3 === 0 ) {
+        if ($i % 3 === 0) {
             $ret = 'Fizz';
         }
-        if( $i % 5 === 0 ) {
-            $ret.= 'Buzz';
+        if ($i % 5 === 0) {
+            $ret .= 'Buzz';
         }
-        if( !$ret ) {
+        if (!$ret) {
             $ret = $i;
         }
         return $ret;
