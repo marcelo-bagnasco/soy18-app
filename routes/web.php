@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/fizzbuzz/{id}', [\App\Http\Controllers\Controller::class, 'fizzBuzz'])->name('FizzBuzz');
+Route::get('/fizzbuzz/{id}', [Controller::class, 'fizzBuzz'])->name('FizzBuzz');
+Route::get('/top_k_elements/{k}/{elements}', [Controller::class, 'topKelements'])->name('TopKElements');

@@ -45,3 +45,25 @@ Or run this command in the command line:
 php artisan app:fizz-buzz 25
 ```
 
+## Top K Frequent Elements
+
+_Given a non-empty array of integers, return the k most frequent elements._
+
+Note:
+
+_You may assume k is always valid, 1 ≤ k ≤ number of unique elements. Your algorithm's time
+complexity must be better than O(n log n), where n is the array's size._
+
+I implemented a service named TopKElements, where I process the elements array in order to get an array with the frequency 
+or appearance of each number in the elements array.
+In order to reach a better time complexity than O(n log n) I distributed the elements into buckets based on its frequency,
+and finally collect the k most frequent elements.
+
+To try it, you can visit:
+[Top K Elements](http://127.0.0.1:8000/top_k_elements/2/1,3,4,4)
+
+Or run this command in the command line:
+```
+php artisan app:top-k-elements 2 1,3,4,4
+```
+
