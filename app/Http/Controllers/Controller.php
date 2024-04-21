@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\FizzBuzz;
+use App\Services\LongestSequence;
 use App\Services\TopKElements;
 use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -48,4 +49,21 @@ class Controller extends BaseController
         }
     }
 
+    public function longestSequence($elements)
+    {
+        $elementsArray = explode(',', $elements);
+
+        try {
+            $LSObj = new LongestSequence($elementsArray);
+            $longestSequence = $LSObj->process();
+
+            echo 'Elements: ';
+            echo "<pre>";
+            print_r($elementsArray);
+            echo "</pre>";
+            echo "Longest Sequence: ".$longestSequence;
+        } catch (Exception $e) {
+            dd('Sorry, we are unable to process your request: '.$e->getMessage());
+        }
+    }
 }

@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/fizzbuzz/{id}', [Controller::class, 'fizzBuzz'])->name('FizzBuzz');
 Route::get('/top_k_elements/{k}/{elements}', [Controller::class, 'topKelements'])->name('TopKElements');
+Route::get('/longest_sequence/{elements}',[Controller::class,'longestSequence'])->name('LongestSequence');

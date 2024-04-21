@@ -67,3 +67,23 @@ Or run this command in the command line:
 php artisan app:top-k-elements 2 1,3,4,4
 ```
 
+## Longest Consecutive Sequence
+
+_Given an unsorted array of integers, find the length of the longest consecutive elements
+sequence. The algorithm should run in O(n) complexity_
+
+I implemented this solution in a Service called LongestSequence, where I first create a keymap where the elements are the keys 
+for this new array and then, I iterate through each element of the received array and check if is a new sequence of consecutive
+numbers. 
+
+I keep the longest sequence number, while testing the rest of the collection. The algorithm has a complexity of O(n) being
+n the number of elements in the array, as it iterates through the array only once.
+
+To try it, you can visit:
+[Longuest consecutive sequence](http://127.0.0.1:8000/longest_sequence/14,5,1,100,3,4,4,2)
+
+Or run this command in the command line:
+```
+php artisan app:longest-sequence 14,5,1,100,3,4,4,2
+```
+
