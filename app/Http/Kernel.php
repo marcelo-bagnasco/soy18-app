@@ -2,6 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AgeDiscountMiddleware;
+use App\Http\Middleware\ItemQuantityDiscountMiddleware;
+use App\Http\Middleware\TotalAmountDiscountMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -64,5 +67,11 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+    ];
+
+    protected $routeMiddleware = [
+        'ageDiscount' => AgeDiscountMiddleware::class,
+        'itemQuantityDiscount' => ItemQuantityDiscountMiddleware::class,
+        'totalAmountDiscount' => TotalAmountDiscountMiddleware::class,
     ];
 }

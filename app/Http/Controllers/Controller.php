@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\BasketService;
 use App\Services\FizzBuzz;
 use App\Services\LongestSequence;
 use App\Services\TopKElements;
@@ -13,6 +14,48 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    protected $basketAmountBeforeDiscounts;
+
+    public function __construct()
+    {
+        // I add the basketItems to the request in order to be used in the Middleware, I need to implement a better solution
+        $basketItems = [
+            [
+                'id' => 1,
+                'item' => 121,
+                'description' => 'Mouse pad',
+                'qty' => 1,
+                'price' => 20,
+            ],
+            [
+                'id' => 2,
+                'item' => 143,
+                'description' => 'Monitor',
+                'qty' => 2,
+                'price' => 40,
+            ],
+            [
+                'id' => 3,
+                'item' => 135,
+                'description' => 'Notebook Lenovo',
+                'qty' => 1,
+                'price' => 60,
+            ],
+            [
+                'id' => 4,
+                'item' => 34,
+                'description' => 'Keyboard',
+                'qty' => 4,
+                'price' => 10,
+            ],
+        ];
+
+        request()->merge(['basketItems' => $basketItems]);
+
+        $basket = new BasketService($basketItems);
+        $this->basketAmountBeforeDiscounts = $basket->totalAmount();
+    }
 
     public function fizzBuzz($number)
     {
@@ -65,5 +108,14 @@ class Controller extends BaseController
         } catch (Exception $e) {
             dd('Sorry, we are unable to process your request: '.$e->getMessage());
         }
+    }
+
+    public function basketPrice()
+    {
+        $basket = new BasketService(request()->basketItems);
+        $finalPrice = $basket->totalAmount();
+
+        echo "Basket price before discount applied: $".$this->basketAmountBeforeDiscounts."<br>";
+        echo "The actual final price of your basket is: $".$finalPrice;
     }
 }

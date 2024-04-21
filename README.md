@@ -87,3 +87,58 @@ Or run this command in the command line:
 php artisan app:longest-sequence 14,5,1,100,3,4,4,2
 ```
 
+## Basket Prices
+
+_Create a service using the middleware pattern to calculate the basket price. Given an array
+of ProductItems and the User, create a service where you can provide different rules to
+calculate the final basket price_
+
+_The Rules will be:_
+- _If the User is less than 21 years old, he has 15% of total discount._
+- _If he bought more than 3 items of the same product, you have a 5% discount (This offer only applies for this product)._
+- _If the total amount is over 100$, you have a 20% of total discount._
+
+I implemented 3 middlewares to be used in the route where the total basket price is calculated.
+One Middleware for each discount rule, so if we need to add a new discount rule it will be enough to add a new middleware 
+and assign it to the required route.
+These classes work directly from the basket items, and modify the request (for example usage, I added the basket items to 
+the request in the Controller constructor, it will be necessary to modify this in a final implementation)
+
+The example basket items is configured with this array:
+```
+$basketItems = [
+    [
+        'id' => 1,
+        'item' => 121,
+        'description' => 'Mouse pad',
+        'qty' => 1,
+        'price' => 20,
+    ],
+    [
+        'id' => 2,
+        'item' => 143,
+        'description' => 'Monitor',
+        'qty' => 2,
+        'price' => 40,
+    ],
+    [
+        'id' => 3,
+        'item' => 135,
+        'description' => 'Notebook Lenovo',
+        'qty' => 1,
+        'price' => 60,
+    ],
+    [
+        'id' => 4,
+        'item' => 34,
+        'description' => 'Keyboard',
+        'qty' => 4,
+        'price' => 10,
+    ],
+];
+```
+
+To try this example, you can visit:
+[Basket Prices](http://127.0.0.1:8000/basket_price)
+
+
