@@ -141,4 +141,38 @@ $basketItems = [
 To try this example, you can visit:
 [Basket Prices](http://127.0.0.1:8000/basket_price)
 
+## Laravel Party
 
+_Given two databases one of those with a table Users (id, name, email) another one with a
+table Exam (id, user_id, exam_date, updated_at, created_at, deleted_at). Create the Laravel
+models with the relationships between both tables._
+
+I implemented a new connection to the database in the config/database.php configuration file, and added a new environment 
+variable (keep track about the new DB_SECOND_DATABASE env variable in the .env.example).
+When creating the new Exam model I established that this model is implemented in the new db connection, while in the User 
+model I established that the model is implemented in the first database connection.
+
+The rest of the implementation is identical to a common related db model of User and Exams.
+
+To try this example, I created a factory and a seeder, so it's possible to check the usage using the tinker tool.
+
+First you need to install the new database schema:
+```
+ php artisan migrate:fresh --seed
+```
+
+Now, you can check that the user info can be fetched from the exam model in the Tinker tool:
+```
+php artian tinker
+```
+
+Inside tinker:
+```
+$examObj = new App\Models\Exam();
+
+## Fetch first exam info
+$examObj->first();
+
+## Fetch first exam users info
+$examObj->first()->user()->first();
+```
